@@ -113,8 +113,8 @@ app.get("/mobiles/:id",function(req,res){
 
 app.post("/mobiles",function(req,res){
     let body = req.body;
-    let query = `INSERT INTO mobiles(name,price,brand,ram,rom,os) VALUES($1,$2,$3,$4,$5,$6)`;
-    client.query(query,[body.name,body.price,body.brand,body.ram,body.rom,body.os],function(err,results){
+    let query = `INSERT INTO mobiles(id,name,price,brand,ram,rom,os) VALUES($1,$2,$3,$4,$5,$6,$7)`;
+    client.query(query,[body.id,body.name,body.price,body.brand,body.ram,body.rom,body.os],function(err,results){
         if(err){
             console.log(err);
             res.status(404).send("Error in inserting data");
