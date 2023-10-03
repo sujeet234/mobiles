@@ -32,12 +32,13 @@ app.get("/mobiles",function(req,res){
     let i=1;
     if(brand){
         let brandArr = brand.split(",");
-        options=`WHERE `;
+        let qury="";
         let or="";
         for(i;i<=brandArr.length;i++){
-            options+=`${or}brand=$${i}`;
+            qury+=`${or}brand=$${i}`;
             or=" OR ";
         }
+        options=`WHERE (${qury})`;
         optionArr=brandArr;
     }
     if(ram){
@@ -89,6 +90,7 @@ app.get("/mobiles",function(req,res){
         optionArr.push(...osArr);
     }
     let query = `SELECT * FROM mobiles ${options}`;
+    console.log(query);
     client.query(query,optionArr,function(err,results){
         if(err){
             console.log(err);
